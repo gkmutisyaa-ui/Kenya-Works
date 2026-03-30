@@ -39,7 +39,10 @@ export function AuthProvider({ children }) {
   const register = async ({ name, email, password, phone, role, skills = [] }) => {
     const { data, error } = await supabase.auth.signUp({
       email, password,
-      options: { data: { name, phone, role, skills } }
+      options: { 
+        data: { name, phone, role, skills },
+        emailRedirectTo: window.location.origin
+      }
     })
     if (error) throw error
     await new Promise(r => setTimeout(r, 800))

@@ -5,7 +5,10 @@ export const authAPI = {
   register: async ({ name, email, password, phone, role, skills = [] }) => {
     const { data, error } = await supabase.auth.signUp({
       email, password,
-      options: { data: { name, phone, role, skills } }
+      options: { 
+        data: { name, phone, role, skills },
+        emailRedirectTo: window.location.origin
+      }
     })
     if (error) throw error
     return data
